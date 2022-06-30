@@ -18,10 +18,7 @@ function App() {
     items = 1;
     window.location.reload();
   }
-<<<<<<< HEAD
 
-=======
->>>>>>> main
   return (
     <Router>
       <div className="App">

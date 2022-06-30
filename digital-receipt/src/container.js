@@ -20,7 +20,7 @@ export default function BasicGrid() {
     return (
         <Grid container xs={6} class={"container-BasicGrid"} id = "receiptPage">
             <div className = "backToList">
-                <Button variant="contained"><Link to = "list/" className = "link" id = "homeLink"><ArrowBackIcon className = "arrowBack"></ArrowBackIcon></Link></Button>
+                <Button variant="text"><Link to = "list/" className = "link" id = "homeLink"><ArrowBackIcon className = "arrowBack"></ArrowBackIcon></Link></Button>
             </div>
             <Grid container spacing={2}
                 direction="row"

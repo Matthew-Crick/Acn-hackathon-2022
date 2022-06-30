@@ -6,22 +6,36 @@ import { Button } from '@mui/material';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+
 
 //import serachData from searchBar
 //Dummy data
 const data =[
-    {"store":"Myer","totalPrice":3,"day":"Monday","items":[], "date": "26 June"},
-    {"store":"Rebel","totalPrice":3,"day":"Monday","items":[], "date": "26 June"},
-    {"store":"Rebel","totalPrice":6,"day":"Tuesday","items":[], "date": "23 June"},
-    {"store":"Myer","totalPrice":6,"day":"Tuesday","items":[], "date": "23 June"},
+    {"store":"Myer","totalPrice":80,"day":"Monday","items": {title: "shirt", quantity: 2, price: 40, category: "Clothes"}, "date": "26 June"},
+    {"store":"Opporto","totalPrice":30,"day":"Monday","items":{title: "Chicken", quantity: 2, price: 15, category: "Eat Out"}, "date": "26 June"},
+    {"store":"Crown","totalPrice":100,"day":"Tuesday","items":{title: "Matilda", quantity: 2, price: 50, category: "Entertainment"}, "date": "23 June"},
+    {"store":"Myer","totalPrice": 40,"day":"Tuesday","items":{title: "Pants", quantity: 1, price: 40, category: "Clothes"}, "date": "23 June"},
 ]
 let filter = "";
+let categoryFilter = "";
 //Global variables
 let counter = 0;
 let currentDate = "";
 let itemCount = 0;
 // const [filter, useFilter] = useState<string>("")
 itemCount = localStorage.getItem("items");
+
+const filterCategory = (category) =>{
+    if (categoryFilter === category){
+        categoryFilter = "";
+    }
+    else{
+        categoryFilter = category;
+    }
+    console.log(categoryFilter);
+}
+
 //Activate at the start when the page loads
 const ListPage = (props) => {
     const [searchTerm, setSearchTerm] = useState("");
@@ -34,19 +48,40 @@ const ListPage = (props) => {
         console.log(searchTerm);
         filter = searchTerm;
     }
+
+    const [searchTermF, setSearchTermF] = useState("");
+    const inputElF = useRef("");
+    const getSearchTermF = (category) => {
+        searchHandlerF(category);
+    };
+    const searchHandlerF = (searchTermF) =>{
+        setSearchTermF(searchTermF);
+        if (categoryFilter === searchTermF){
+            categoryFilter = "";
+            console.log(categoryFilter);
+        }
+        else{
+            console.log(searchTermF);
+        categoryFilter = searchTermF;
+        }
+    }
+
     //Page content
     return (
         <div className = "pageContent">
             <SearchIcon class = "searchSymbol"></SearchIcon>
             <input type = "text" placeholder='Search through receipts' className = "prompt"
                 value = {props.term} onChange={ getSearchTerm } ref = {inputEl}/>
+                <></>
+                <text className = "starPadding"> </text>
+                <Button variant="contained" ><StarBorderIcon className = "QRCodeIcon"></StarBorderIcon></Button>
                 <p></p>
-                <div className = "buttonSection">
-                <Button variant="contained">ENTERTAINMENT</Button>
-                <text className = "buttonSpacing1"></text>
-                <Button variant="contained">GROCERY</Button>
-                <text className = "buttonSpacing2"></text>
-                <Button variant="contained">EAT OUT</Button>
+                <div class = "buttonSection">
+                <Button onClick={()=>getSearchTermF("Entertainment")}className = "categoryButton1" variant="contained">ENTERTAINMENT</Button>
+                <text className = "categoryPadding"> </text>
+                <Button onClick={()=>getSearchTermF("Clothes")} className = "categoryButton2" variant="contained">CLOTHES</Button>
+                <text className = "categoryPadding"> </text>
+                <Button onClick={()=>getSearchTermF("Eat Out")} className = "categoryButton3" variant="contained">EAT OUT</Button>
                 </div>
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Outfit&family=Work+Sans:wght@100&display=swap');
@@ -65,14 +100,12 @@ const createList = (filter, items) => {
     //Contains the jsx info, each element is one day
     let printList = [];
     //Loop through data
-    printList.push(createDay());
-    currentDate = data[counter].date;
+    currentDate = "0";
     for (counter = 0; counter < items; counter++){
         //If search bar has content
         let storeName = data[counter].store.toLowerCase();
         //If search bar is empty
-        if (filter.trim().length === 0){
-            
+        if (filter.trim().length === 0 && categoryFilter === ""){
             //Push the jsx info for one day
             if (currentDate !== data[counter].date){
                 currentDate = data[counter].date;
@@ -81,8 +114,8 @@ const createList = (filter, items) => {
             printList.push(createReceipt());
             console.log(counter);
         }
-        else if (
-            //Filter by storename, date and day
+        else if (categoryFilter === ""){
+            if (//Filter by storename, date and day
             storeName.includes(filter.toLowerCase()) ||
             data[counter].date.includes(filter) ||
             data[counter].day.includes(filter)){
@@ -93,6 +126,29 @@ const createList = (filter, items) => {
                 }
                 printList.push(createReceipt());
             }
+        }
+        else if (filter.trim().length === 0){
+            if(data[counter].items.category.includes(categoryFilter)){
+                if (currentDate !== data[counter].date){
+                    currentDate = data[counter].date;
+                    printList.push(createDay());
+                }
+                printList.push(createReceipt());
+            }
+        }
+        else if (filter.trim().length !== 0 && categoryFilter !== ""){
+            if(
+                (storeName.includes(filter.toLowerCase()) ||
+                data[counter].date.includes(filter) ||
+                data[counter].day.includes(filter))&&
+                data[counter].items.category.includes(categoryFilter)){
+                    if (currentDate !== data[counter].date){
+                        currentDate = data[counter].date;
+                        printList.push(createDay());
+                    }
+                    printList.push(createReceipt());
+        }
+        }
     }
     //Set the jsx into a div block to display
     return(
@@ -132,4 +188,3 @@ const createReceipt = () => {
     );
 }
 export default ListPage;
-/* eslint-disable */

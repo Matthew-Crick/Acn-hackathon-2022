@@ -3,7 +3,21 @@ import { QrReader } from 'react-qr-reader';
 //Import Link to use
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
-var itemCount = localStorage.getItem("items"); 
+import { BrowserRouter as Router, Route } from 'react-router-dom'; 
+var itemCount = localStorage.getItem("items");
+
+
+
+const QRScanned = (data) =>{
+  if (data === "No result"){
+    //Do nothing
+  }
+  else{
+    itemCountInc();
+    console.log("Done");
+    window.location.href = 'http://localhost:3000/container'; 
+  }
+}
 
 const HomePage = () => {
   const [data, setData] = useState('No result');
@@ -11,23 +25,22 @@ const HomePage = () => {
   return (
     <>
     <div className = "QRCode">
-    <br></br>
-    <br></br>
-    <br></br>
+      <br></br>
+    <h2>Add Digital Receipt</h2>
     <br></br>
     <QrReader
         onResult={(result, error) => {
-          if (!!result) {
+          if (result) {
             setData(result?.text);
           }
 
-          if (!!error) {
+          if (error) {
             console.info(error);
           }
         }}
         style={{ height: '100%'}}
         />
-        <p>Please scan a QR Code</p>
+        <p>{QRScanned(data)}</p>
         </div>
         <div className = "receiptButton">
             <Button variant="outlined" className = "receiptButtonButton" onClick={itemCountInc}>

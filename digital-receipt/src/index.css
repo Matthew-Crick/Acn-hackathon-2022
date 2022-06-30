@@ -127,29 +127,51 @@ code {
   transform: translateY(33%);
 }
 
-<<<<<<< HEAD
 .backToList{
   position: absolute;
-  left:    5%;
-  top:   0%;
+  left:    3%;
+  top:   1%;
 }
 
 #receiptPage{
   padding: 5%;
 }
 
-.arrowBack{
-  background-color: gray;
-}
-=======
 .buttonSpacing1{
   padding-right: 10%
-
 }
 
 .buttonSpacing2{
   padding-right: 10%
 }
 
+.categoryButton1{
+  width: 40%;
+  height: 5%;
+  margin-left:1000;
+}
+.categoryButton2{
+  width: 30%;
+  height: 5%;
+  margin-left:1000;
+}
+.categoryButton3{
+  width: 28%;
+  height: 5%;
+}
 
->>>>>>> main
+.buttonSection{
+  display: inline-block;
+}
+
+.starPadding{
+  padding-left: 5%;
+}
+
+#starButton{
+  width:10%;
+}
+
+.prompt{
+  width:52%;
+}
