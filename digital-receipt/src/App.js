@@ -10,18 +10,19 @@ import { useState } from 'react';
 
 function App() {
   var items = localStorage.getItem("items");
-
   if (items){
-
+    let t = 3;
   }
   else{
     localStorage.setItem("items", 1);
     items = 1;
     window.location.reload();
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
   return (
-
     <Router>
       <div className="App">
         <Switch>
@@ -29,7 +30,7 @@ function App() {
            <BasicGrid />
           </Route>
           <Route exact path = "/list">
-            <ListPage 
+            <ListPage
             />
           </Route>
           <Route exact path = "/">
@@ -43,5 +44,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;

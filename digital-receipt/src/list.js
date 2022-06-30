@@ -1,3 +1,4 @@
+/* eslint-disable */
 //Import Link to use
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -7,8 +8,6 @@ import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 
 //import serachData from searchBar
-
-
 //Dummy data
 const data =[
     {"store":"Myer","totalPrice":3,"day":"Monday","items":[], "date": "26 June"},
@@ -17,36 +16,38 @@ const data =[
     {"store":"Myer","totalPrice":6,"day":"Tuesday","items":[], "date": "23 June"},
 ]
 let filter = "";
-
 //Global variables
 let counter = 0;
 let currentDate = "";
 let itemCount = 0;
 // const [filter, useFilter] = useState<string>("")
-itemCount = localStorage.getItem("items"); 
-
-
+itemCount = localStorage.getItem("items");
 //Activate at the start when the page loads
 const ListPage = (props) => {
     const [searchTerm, setSearchTerm] = useState("");
     const inputEl = useRef("");
-
     const getSearchTerm = () => {
         searchHandler(inputEl.current.value);
     };
-
     const searchHandler = (searchTerm) =>{
         setSearchTerm(searchTerm);
         console.log(searchTerm);
         filter = searchTerm;
     }
-    
     //Page content
-    return ( 
+    return (
         <div className = "pageContent">
             <SearchIcon class = "searchSymbol"></SearchIcon>
-            <input type = "text" placeholder='Search through receipts' className = "prompt" 
+            <input type = "text" placeholder='Search through receipts' className = "prompt"
                 value = {props.term} onChange={ getSearchTerm } ref = {inputEl}/>
+                <p></p>
+                <div className = "buttonSection">
+                <Button variant="contained">ENTERTAINMENT</Button>
+                <text className = "buttonSpacing1"></text>
+                <Button variant="contained">GROCERY</Button>
+                <text className = "buttonSpacing2"></text>
+                <Button variant="contained">EAT OUT</Button>
+                </div>
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Outfit&family=Work+Sans:wght@100&display=swap');
             </style>
@@ -55,27 +56,23 @@ const ListPage = (props) => {
             <div className = "QRGoBack">
             <Button variant="contained"><Link to = "/" className = "link" id = "homeLink"><QrCodeIcon className = "QRCodeIcon"></QrCodeIcon></Link></Button>
             </div>
-        </div> 
-        
+        </div>
      );
 }
-
 //Creates the list based of inputs in the search bar
 const createList = (filter, items) => {
     counter = 0;
-
     //Contains the jsx info, each element is one day
     let printList = [];
-    
     //Loop through data
     printList.push(createDay());
     currentDate = data[counter].date;
-
     for (counter = 0; counter < items; counter++){
         //If search bar has content
         let storeName = data[counter].store.toLowerCase();
         //If search bar is empty
         if (filter.trim().length === 0){
+            
             //Push the jsx info for one day
             if (currentDate !== data[counter].date){
                 currentDate = data[counter].date;
@@ -89,7 +86,6 @@ const createList = (filter, items) => {
             storeName.includes(filter.toLowerCase()) ||
             data[counter].date.includes(filter) ||
             data[counter].day.includes(filter)){
-
                 //Push the jsx info for one day
                 if (currentDate !== data[counter].date){
                     currentDate = data[counter].date;
@@ -98,7 +94,6 @@ const createList = (filter, items) => {
                 printList.push(createReceipt());
             }
     }
-
     //Set the jsx into a div block to display
     return(
         <div>
@@ -106,20 +101,17 @@ const createList = (filter, items) => {
         </div>
     );
 }
-
 //Creates jsx for all the receipts in one day
 const createDay = () => {
     //Extract current day to display
     var day = data[counter].day;
-
     //Returnt the complete jsx code for one day
     return(
         <div className = "newDay">
         <h2 className = "receiptTitle">{day}</h2>
         </div>
     );
-} 
-
+}
 //Creates individual receipt entries
 const createReceipt = () => {
     //Return jsx based of current counter
@@ -138,6 +130,6 @@ const createReceipt = () => {
         </div>
         </Link>
     );
-} 
-
+}
 export default ListPage;
+/* eslint-disable */

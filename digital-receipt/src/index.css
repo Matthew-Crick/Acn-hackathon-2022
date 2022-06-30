@@ -127,6 +127,7 @@ code {
   transform: translateY(33%);
 }
 
+<<<<<<< HEAD
 .backToList{
   position: absolute;
   left:    5%;
@@ -140,3 +141,15 @@ code {
 .arrowBack{
   background-color: gray;
 }
+=======
+.buttonSpacing1{
+  padding-right: 10%
+
+}
+
+.buttonSpacing2{
+  padding-right: 10%
+}
+
+
+>>>>>>> main
