@@ -13,8 +13,11 @@ code {
 }
 
 .pageContent{
-  font-family: 'Work Sans', sans-serif;
-  width: 100%
+  font-family: 'Outfit', sans-serif;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  padding-top: 2%;
 }
 .newDay {
   padding-left: 5%;
@@ -25,18 +28,28 @@ code {
 .receiptTitle {
   text-align: left;
   margin-bottom: 1%;
+  padding-bottom: 2%;
 }
 
 .receiptInfo{
   width:100%;
   text-align: left;
   padding-left:1%;
-  font-weight: bold;
+  padding-bottom:10%;
+  border-collapse:collapse;
+  border-spacing:0;
+  border-radius:1%;
+  box-shadow:
+  6px 5px 5px 5px
+  rgb(227, 227, 227);
+  border-radius:5px;
+  line-height: 35px;
 }
 
 .receiptDate {
   width: 10%;
   text-align: left;
+  border-top: white;
 }
 
 .receiptStore {
@@ -61,4 +74,42 @@ code {
   color: black;
 }
 
+#homeLink{
+  font-weight:bold;
+  text-align: left;
+  padding-left: 3%;
+}
 
+.QRCode{
+  height: 100%;
+  width: 100%;
+  vertical-align: bottom;
+}
+
+.receiptButton{
+  width:100%;
+  align-items: left;
+}
+
+.receiptButtonButton{
+  position: absolute;
+  top:50%;
+  right: 0;
+  width: 120px;
+  transform: translateY(40%);
+  padding: 3;
+}
+
+.QRGoBack{
+  position: absolute;
+  right:    5%;
+  bottom:   5%;
+}
+
+.QRCodeIcon{
+  color: white;
+}
+
+.buttonSpacing{
+  padding: 3%;
+}

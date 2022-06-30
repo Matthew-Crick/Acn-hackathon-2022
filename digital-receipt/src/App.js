@@ -7,21 +7,27 @@ import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-boots
 import HomePage from './home';
 
 function App() {
+  var items = localStorage.getItem("items");
+  if (items){
+
+  }
+  else{
+    localStorage.setItem("items", 1);
+    items = 1;
+    window.location.reload();
+  }
+
   return (
 
     <Router>
       <div className="App">
-        <Navbar className = "navBar">
-        <Link to = "/home" className = "link">Home</Link>
-        <Link to = "/list" className = "link">Receipts</Link>
-        </Navbar>
-        <hr></hr>
         <Switch>
           <Route exact path = "/list">
-           <ListPage />
+            <ListPage 
+            />
           </Route>
-          <Route exact path = "/home">
-           <HomePage />
+          <Route exact path = "/">
+            <HomePage/>
           </Route>
         </Switch>
       </div>
