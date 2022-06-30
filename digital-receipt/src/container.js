@@ -3,6 +3,8 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import barcode from './barcode.png';
+import { Button } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBackOutlined';
 import './container.css';
 import { Link } from 'react-router-dom';
 
@@ -16,8 +18,10 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function BasicGrid() {
     return (
-        <Grid container xs={6} class={"container-BasicGrid"}>
-
+        <Grid container xs={6} class={"container-BasicGrid"} id = "receiptPage">
+            <div className = "backToList">
+                <Button variant="text"><Link to = "list/" className = "link" id = "homeLink"><ArrowBackIcon className = "arrowBack"></ArrowBackIcon></Link></Button>
+            </div>
             <Grid container spacing={2}
                 direction="row"
                 justifyContent="center"
@@ -113,7 +117,7 @@ export default function BasicGrid() {
                 </Grid> */}
                 
 
-                <Grid item xs={4} >
+                <Grid item xs={12} >
                     <img src={barcode} />
                 </Grid>
             </Grid>

@@ -24,7 +24,7 @@ code {
 .newDay {
   padding-left: 5%;
   padding-right:5%;
-  padding-bottom: 5%
+  padding-bottom: 0%
 }
 
 .receiptTitle {
@@ -42,7 +42,7 @@ code {
   width:100%;
   text-align: left;
   padding-left:1%;
-  padding-bottom:10%;
+  padding-bottom:0%;
   border-collapse:collapse;
   border-spacing:0;
   border-radius:1%;
@@ -76,7 +76,7 @@ code {
 }
 
 .link{
-  padding: 4%;
+  padding: 2%;
   text-decoration:none; 
   color: black;
 }
@@ -127,13 +127,51 @@ code {
   transform: translateY(33%);
 }
 
+.backToList{
+  position: absolute;
+  left:    3%;
+  top:   1%;
+}
+
+#receiptPage{
+  padding: 5%;
+}
+
 .buttonSpacing1{
   padding-right: 10%
-
 }
 
 .buttonSpacing2{
   padding-right: 10%
 }
 
+.categoryButton1{
+  width: 40%;
+  height: 5%;
+  margin-left:1000;
+}
+.categoryButton2{
+  width: 30%;
+  height: 5%;
+  margin-left:1000;
+}
+.categoryButton3{
+  width: 28%;
+  height: 5%;
+}
 
+.buttonSection{
+  display: inline-block;
+}
+
+.starPadding{
+  padding-left: 5%;
+}
+
+#starButton{
+  width:10%;
+}
+
+.prompt{
+  width:52%;
+}

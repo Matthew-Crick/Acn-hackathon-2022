@@ -18,6 +18,7 @@ function App() {
     items = 1;
     window.location.reload();
   }
+
   return (
     <Router>
       <div className="App">
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route exact path = "/">
             <HomePage/>
+          </Route>
+          <Route exact path = "/container">
+            <BasicGrid/>
           </Route>
         </Switch>
       </div>
