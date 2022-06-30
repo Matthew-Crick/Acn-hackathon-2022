@@ -5,9 +5,12 @@ import ListPage from './list';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { useState } from 'react';
+
 
 function App() {
   var items = localStorage.getItem("items");
+
   if (items){
 
   }
@@ -16,6 +19,8 @@ function App() {
     items = 1;
     window.location.reload();
   }
+
+
 
   return (
 
