@@ -1,8 +1,10 @@
 //Import Link to use
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 import { useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
 
 //import serachData from searchBar
 
@@ -23,11 +25,28 @@ let itemCount = 0;
 // const [filter, useFilter] = useState<string>("")
 itemCount = localStorage.getItem("items"); 
 
+
 //Activate at the start when the page loads
-const ListPage = () => {
+const ListPage = (props) => {
+    const [searchTerm, setSearchTerm] = useState("");
+    const inputEl = useRef("");
+
+    const getSearchTerm = () => {
+        searchHandler(inputEl.current.value);
+    };
+
+    const searchHandler = (searchTerm) =>{
+        setSearchTerm(searchTerm);
+        console.log(searchTerm);
+        filter = searchTerm;
+    }
+    
     //Page content
     return ( 
         <div className = "pageContent">
+            <SearchIcon class = "searchSymbol"></SearchIcon>
+            <input type = "text" placeholder='Search through receipts' className = "prompt" 
+                value = {props.term} onChange={ getSearchTerm } ref = {inputEl}/>
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Outfit&family=Work+Sans:wght@100&display=swap');
             </style>
@@ -43,27 +62,43 @@ const ListPage = () => {
 
 //Creates the list based of inputs in the search bar
 const createList = (filter, items) => {
+    counter = 0;
 
     //Contains the jsx info, each element is one day
     let printList = [];
     
     //Loop through data
+    printList.push(createDay());
+    currentDate = data[counter].date;
+
     for (counter = 0; counter < items; counter++){
+        //If search bar has content
+        let storeName = data[counter].store.toLowerCase();
         //If search bar is empty
         if (filter.trim().length === 0){
-            currentDate = data[counter].date;
-            printList.push(createDay(items));
+            if (counter == 0){
+                
+            }
+            //Push the jsx info for one day
+            if (currentDate !== data[counter].date){
+                currentDate = data[counter].date;
+                printList.push(createDay());
+            }
+            printList.push(createReceipt());
+            console.log(counter);
         }
-        //If search bar has content
         else if (
             //Filter by storename, date and day
-            data[counter].store.includes(filter) ||
+            storeName.includes(filter.toLowerCase()) ||
             data[counter].date.includes(filter) ||
             data[counter].day.includes(filter)){
-                //Set current date to current receipt
-                currentDate = data[counter].date;
+
                 //Push the jsx info for one day
-                printList.push(createDay());
+                if (currentDate !== data[counter].date){
+                    currentDate = data[counter].date;
+                    printList.push(createDay());
+                }
+                printList.push(createReceipt());
             }
     }
 
@@ -76,53 +111,23 @@ const createList = (filter, items) => {
 }
 
 //Creates jsx for all the receipts in one day
-const createDay = (items) => {
-    //Contains jsx for all the receipts in one day
-    let printReceipts = [];
+const createDay = () => {
     //Extract current day to display
-    let day = data[counter].day;
-
-    //Will have at least one receipt so push for current counter
-    printReceipts.push(createReceipt(counter));
-    
-    //If counter is not at the end
-    if (counter != items-1){
-        //While counter is less than the last element
-        while (counter < items-1){
-            //Check if the next receipt has the same date
-            if (currentDate === data[counter+1].date){
-                //Check if matches filters
-                if (
-                    data[counter+1].store.includes(filter) ||
-                    data[counter+1].date.includes(filter) ||
-                    data[counter+1].day.includes(filter)){
-                        printReceipts.push(createReceipt(counter+1));
-                    }
-
-                //Increment the counter
-                counter++;
-            }
-            //If not same date then break to move onto next day
-            else{
-                break;
-            };
-        }
-    }
+    var day = data[counter].day;
 
     //Returnt the complete jsx code for one day
     return(
         <div className = "newDay">
         <h2 className = "receiptTitle">{day}</h2>
-            {printReceipts}
         </div>
     );
 } 
 
 //Creates individual receipt entries
-const createReceipt = (counter) => {
+const createReceipt = () => {
     //Return jsx based of current counter
     return(
-        <div>
+        <div className = "tablePadding">
         <table className = 'receiptInfo'>
         <tr className = 'receiptBlock'>
             {/* Use an a tag here potentially to make whole row clicable*/}
