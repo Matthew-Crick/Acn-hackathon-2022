@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 //import searchBar from './searchBar';
 //import SearchIcon from "@material-ui/icons/Search";
 //import * as JsSearch from 'js-search';
+import Box from '@mui/material/Box';
 
 
 export const searchData = [

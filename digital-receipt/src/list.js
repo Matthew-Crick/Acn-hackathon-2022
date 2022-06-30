@@ -1,11 +1,14 @@
 //import serachData from searchBar
+import searchBar from './searchBar';
+import SearchIcon from '@mui/icons-material/Search';
+import Box from '@mui/material/Box';
 
 //Dummy data
 const data =[
-    {"store":"Myer","totalPrice":3,"day":"Monday","items":[], "date": "26 June"},
-    {"store":"Rebel","totalPrice":3,"day":"Monday","items":[], "date": "26 June"},
-    {"store":"Rebel","totalPrice":6,"day":"Tuesday","items":[], "date": "23 June"},
-    {"store":"Myer","totalPrice":6,"day":"Tuesday","items":[], "date": "23 June"},
+    {"store":"Myer","totalPrice":3,"day":"Monday","items":[], "date": "26 June","categories":"Entertainment"},
+    {"store":"Rebel","totalPrice":3,"day":"Monday","items":[], "date": "26 June","categories":"Groceries"},
+    {"store":"Rebel","totalPrice":6,"day":"Tuesday","items":[], "date": "23 June","categories":"Eating Out"},
+    {"store":"Myer","totalPrice":6,"day":"Tuesday","items":[], "date": "23 June","categories":"Transport"},
 ]
 let filter = "";
 
@@ -18,6 +21,7 @@ const ListPage = () => {
     //Page content
     return ( 
         <div className = "pageContent">
+            <SearchIcon></SearchIcon>
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100&display=swap');
             </style>
@@ -45,7 +49,8 @@ const createList = (filter) => {
             //Filter by storename, date and day
             data[counter].store.includes(filter) ||
             data[counter].date.includes(filter) ||
-            data[counter].day.includes(filter)){
+            data[counter].day.includes(filter) ||
+            data[counter].categories.includes(filter)){
                 //Set current date to current receipt
                 currentDate = data[counter].date;
                 //Push the jsx info for one day
@@ -81,7 +86,8 @@ const createDay = () => {
                 if (
                     data[counter+1].store.includes(filter) ||
                     data[counter+1].date.includes(filter) ||
-                    data[counter+1].day.includes(filter)){
+                    data[counter+1].day.includes(filter) ||
+                    data[counter+1].categories.includes(filter)){
                         printReceipts.push(createReceipt(counter+1));
                     }
 
@@ -91,7 +97,7 @@ const createDay = () => {
             //If not same date then break to move onto next day
             else{
                 break;
-            };
+            }
         }
     }
 
@@ -115,6 +121,7 @@ const createReceipt = (counter) => {
             <td className = 'receiptDate'>{data[counter].date}</td>
             <td className = 'receiptStore'>{data[counter].store}</td>
             <td className = 'receiptPrice'>${data[counter].totalPrice}</td>
+            <td className = 'receiptCategories'>{data[counter].categories}</td>
         </tr>
     );
 } 
