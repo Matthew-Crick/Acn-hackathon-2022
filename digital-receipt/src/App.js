@@ -3,9 +3,14 @@ import './App.css';
 import React from 'react';
 import searchBar from './searchBar';
 import SearchIcon from "@material-ui/icons/Search";
+
+import ListPage from './list';
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import { Link } from 'react-router-dom';
+import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import HomePage from './home';
 //import * as JsSearch from 'js-search';
 import { useState } from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
 
 const{ search }= window.location;
 const query = new URLSearchParams(search).get('s');
@@ -58,7 +63,30 @@ function App() {
       </header>
     </div>
   )</Router>;
-}
+  
+
+function App() {
+  return (
+
+    <Router>
+      <div className="App">
+        <Navbar className = "navBar">
+        <Link to = "/home" className = "link">Home</Link>
+        <Link to = "/list" className = "link">Receipts</Link>
+        </Navbar>
+        <hr></hr>
+        <Switch>
+          <Route exact path = "/list">
+           <ListPage />
+          </Route>
+          <Route exact path = "/home">
+           <HomePage />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
+}}
 
 
 
