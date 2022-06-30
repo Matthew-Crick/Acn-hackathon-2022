@@ -1,10 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
+import HomePage from './home';
+import BasicGrid from './container';
 import ListPage from './list';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
-import HomePage from './home';
 
 function App() {
   var items = localStorage.getItem("items");
@@ -22,6 +22,9 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
+        <Route exact path = "/receipt">
+           <BasicGrid />
+          </Route>
           <Route exact path = "/list">
             <ListPage 
             />
