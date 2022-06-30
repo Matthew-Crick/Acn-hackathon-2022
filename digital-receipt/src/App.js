@@ -1,13 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+<<<<<<< HEAD
 import React from 'react';
 
 
 
+=======
+import HomePage from './home';
+import BasicGrid from './container';
+>>>>>>> main
 import ListPage from './list';
 import { BrowserRouter as Router, Route, Switch,} from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+<<<<<<< HEAD
 import HomePage from './home';
 //import * as JsSearch from 'js-search';
 import { useState } from 'react';
@@ -66,24 +71,43 @@ import { useState } from 'react';
   
 
 // }
+=======
+>>>>>>> main
 
 function App() {
+  var items = localStorage.getItem("items");
+  if (items){
+
+  }
+  else{
+    localStorage.setItem("items", 1);
+    items = 1;
+    window.location.reload();
+  }
+
   return (
 
     <Router>
       <div className="App">
+<<<<<<< HEAD
         <Navbar className = "navBar">
         <Link to = "/home" className = "link">Home</Link>
         <Link to = "/list" className = "link">Receipts</Link>
         <Link to = "/list" className = "link">Search</Link>
         </Navbar>
         <hr></hr>
+=======
+>>>>>>> main
         <Switch>
-          <Route exact path = "/list">
-           <ListPage />
+        <Route exact path = "/receipt">
+           <BasicGrid />
           </Route>
-          <Route exact path = "/home">
-           <HomePage />
+          <Route exact path = "/list">
+            <ListPage 
+            />
+          </Route>
+          <Route exact path = "/">
+            <HomePage/>
           </Route>
         </Switch>
       </div>
@@ -91,6 +115,10 @@ function App() {
   );
 }
 
+<<<<<<< HEAD
 
 
 export default App;
+=======
+export default App;
+>>>>>>> main

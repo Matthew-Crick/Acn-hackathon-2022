@@ -1,7 +1,14 @@
+//Import Link to use
+import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
+import QrCodeIcon from '@mui/icons-material/QrCode';
+import { useState } from 'react';
+
 //import serachData from searchBar
 import searchBar from './searchBar';
 import SearchIcon from '@mui/icons-material/Search';
 import Box from '@mui/material/Box';
+
 
 //Dummy data
 const data =[
@@ -15,6 +22,9 @@ let filter = "";
 //Global variables
 let counter = 0;
 let currentDate = "";
+let itemCount = 0;
+// const [filter, useFilter] = useState<string>("")
+itemCount = localStorage.getItem("items"); 
 
 //Activate at the start when the page loads
 const ListPage = () => {
@@ -23,26 +33,30 @@ const ListPage = () => {
         <div className = "pageContent">
             <SearchIcon></SearchIcon>
             <style>
-                @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100&display=swap');
+                @import url('https://fonts.googleapis.com/css2?family=Outfit&family=Work+Sans:wght@100&display=swap');
             </style>
             {/*Call function to create the list for the first time */}
-            {createList(filter)}
+            {createList(filter, itemCount)}
+            <div className = "QRGoBack">
+            <Button variant="contained"><Link to = "/" className = "link" id = "homeLink"><QrCodeIcon className = "QRCodeIcon"></QrCodeIcon></Link></Button>
+            </div>
         </div> 
+        
      );
 }
 
 //Creates the list based of inputs in the search bar
-const createList = (filter) => {
+const createList = (filter, items) => {
 
     //Contains the jsx info, each element is one day
     let printList = [];
     
     //Loop through data
-    for (counter = 0; counter < data.length; counter++){
+    for (counter = 0; counter < items; counter++){
         //If search bar is empty
         if (filter.trim().length === 0){
             currentDate = data[counter].date;
-            printList.push(createDay());
+            printList.push(createDay(items));
         }
         //If search bar has content
         else if (
@@ -67,7 +81,7 @@ const createList = (filter) => {
 }
 
 //Creates jsx for all the receipts in one day
-const createDay = () => {
+const createDay = (items) => {
     //Contains jsx for all the receipts in one day
     let printReceipts = [];
     //Extract current day to display
@@ -77,9 +91,9 @@ const createDay = () => {
     printReceipts.push(createReceipt(counter));
     
     //If counter is not at the end
-    if (counter != data.length-1){
+    if (counter != items-1){
         //While counter is less than the last element
-        while (counter < data.length-1){
+        while (counter < items-1){
             //Check if the next receipt has the same date
             if (currentDate === data[counter+1].date){
                 //Check if matches filters
@@ -105,9 +119,7 @@ const createDay = () => {
     return(
         <div className = "newDay">
         <h2 className = "receiptTitle">{day}</h2>
-        <table className = 'receiptInfo'>
             {printReceipts}
-        </table>  
         </div>
     );
 } 
@@ -116,13 +128,18 @@ const createDay = () => {
 const createReceipt = (counter) => {
     //Return jsx based of current counter
     return(
-        <tr>
+        <div>
+        <table className = 'receiptInfo'>
+        <tr className = 'receiptBlock'>
             {/* Use an a tag here potentially to make whole row clicable*/}
             <td className = 'receiptDate'>{data[counter].date}</td>
             <td className = 'receiptStore'>{data[counter].store}</td>
             <td className = 'receiptPrice'>${data[counter].totalPrice}</td>
             <td className = 'receiptCategories'>{data[counter].categories}</td>
         </tr>
+        </table>
+        <br></br>
+        </div>
     );
 } 
 
