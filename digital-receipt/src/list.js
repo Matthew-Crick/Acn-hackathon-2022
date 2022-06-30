@@ -1,3 +1,4 @@
+/* eslint-disable */
 //Import Link to use
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -5,6 +6,7 @@ import { Button } from '@mui/material';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
+
 //import serachData from searchBar
 //Dummy data
 const data =[
@@ -38,6 +40,14 @@ const ListPage = (props) => {
             <SearchIcon class = "searchSymbol"></SearchIcon>
             <input type = "text" placeholder='Search through receipts' className = "prompt"
                 value = {props.term} onChange={ getSearchTerm } ref = {inputEl}/>
+                <p></p>
+                <div className = "buttonSection">
+                <Button variant="contained">ENTERTAINMENT</Button>
+                <text className = "buttonSpacing1"></text>
+                <Button variant="contained">GROCERY</Button>
+                <text className = "buttonSpacing2"></text>
+                <Button variant="contained">EAT OUT</Button>
+                </div>
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Outfit&family=Work+Sans:wght@100&display=swap');
             </style>
@@ -62,8 +72,7 @@ const createList = (filter, items) => {
         let storeName = data[counter].store.toLowerCase();
         //If search bar is empty
         if (filter.trim().length === 0){
-            if (counter == 0){
-            }
+            
             //Push the jsx info for one day
             if (currentDate !== data[counter].date){
                 currentDate = data[counter].date;
@@ -121,3 +130,4 @@ const createReceipt = () => {
     );
 }
 export default ListPage;
+/* eslint-disable */

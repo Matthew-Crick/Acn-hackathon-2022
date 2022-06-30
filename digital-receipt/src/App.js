@@ -6,9 +6,12 @@ import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { useState } from 'react';
+
+
 function App() {
   var items = localStorage.getItem("items");
   if (items){
+    let t = 3;
   }
   else{
     localStorage.setItem("items", 1);
