@@ -31,7 +31,7 @@ const HomePage = () => {
         </div>
         <div className = "receiptButton">
             <Button variant="outlined" className = "receiptButtonButton" onClick={itemCountInc}>
-                <Link to = "/list" className = "link">Scan</Link>
+                <Link to = "/container" className = "link">Scan</Link>
             </Button>
             <text className = "buttonSpacing"></text>
             <Button variant="outlined" className = "receiptButtonButton">

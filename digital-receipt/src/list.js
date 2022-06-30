@@ -76,9 +76,6 @@ const createList = (filter, items) => {
         let storeName = data[counter].store.toLowerCase();
         //If search bar is empty
         if (filter.trim().length === 0){
-            if (counter == 0){
-                
-            }
             //Push the jsx info for one day
             if (currentDate !== data[counter].date){
                 currentDate = data[counter].date;
@@ -127,6 +124,7 @@ const createDay = () => {
 const createReceipt = () => {
     //Return jsx based of current counter
     return(
+        <Link to = "/container" className = "link">
         <div className = "tablePadding">
         <table className = 'receiptInfo'>
         <tr className = 'receiptBlock'>
@@ -138,6 +136,7 @@ const createReceipt = () => {
         </table>
         <br></br>
         </div>
+        </Link>
     );
 } 
 
