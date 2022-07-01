@@ -14,9 +14,10 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 const data =[
     {"location": "Melbourne Central, 3000", "store":"Rebel Sport","totalPrice":180,"day":"Monday","items": {title: ["Nike Running Shoes", "Adidas Puffer Jacket", "Beanie"], quantity: 1, price: [100, 65, 15], category: "Clothes"}, "date": "26 June"},
     {"location": "Chadstone, 3148","store":"Opporto","totalPrice":38,"day":"Monday","items":{title: ["Chicken", "Wrap", "Burger"], quantity: 2, price: [15,10, 13], category: "Eat Out"}, "date": "26 June"},
-    {"location": "Southbank, 3006","store":"Crown","totalPrice":70,"day":"Tuesday","items":{title: ["Tickets", "Popcorn", "Drinks"], quantity: 2, price: [50,13,7], category: "Entertainment"}, "date": "23 June"},
-    {"location": "Chadstone, 3148","store":"Rebel Sport","totalPrice": 150,"day":"Tuesday","items":{title: ["Pants", "Shirt", "Shoes"], quantity: 1, price: [50,30, 70], category: "Clothes"}, "date": "23 June"},
+    {"location": "Southbank, 3006","store":"Crown","totalPrice":70,"day":"Saturday","items":{title: ["Tickets", "Popcorn", "Drinks"], quantity: 2, price: [50,13,7], category: "Entertainment"}, "date": "24 June"},
+    {"location": "Chadstone, 3148","store":"Rebel Sport","totalPrice": 150,"day":"Friday","items":{title: ["Pants", "Shirt", "Shoes"], quantity: 1, price: [50,30, 70], category: "Clothes"}, "date": "23 June"},
 ]
+
 let filter = "";
 let categoryFilter = "";
 //Global variables
