@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { BrowserRouter as Router, Route } from 'react-router-dom'; 
 var itemCount = localStorage.getItem("items");
+var scanned = false;
 
 
 
@@ -12,8 +13,9 @@ const QRScanned = (data) =>{
   if (data === "No result"){
     //Do nothing
   }
-  else{
+  else if (data !== "No result" && !scanned){
     itemCountInc();
+    scanned = true;
     console.log("Done");
     window.location.href = 'http://localhost:3000/container'; 
   }

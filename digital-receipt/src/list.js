@@ -12,10 +12,10 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 //import serachData from searchBar
 //Dummy data
 const data =[
-    {"store":"Myer","totalPrice":80,"day":"Monday","items": {title: "shirt", quantity: 2, price: 40, category: "Clothes"}, "date": "26 June"},
-    {"store":"Opporto","totalPrice":30,"day":"Monday","items":{title: "Chicken", quantity: 2, price: 15, category: "Eat Out"}, "date": "26 June"},
-    {"store":"Crown","totalPrice":100,"day":"Tuesday","items":{title: "Matilda", quantity: 2, price: 50, category: "Entertainment"}, "date": "23 June"},
-    {"store":"Myer","totalPrice": 40,"day":"Tuesday","items":{title: "Pants", quantity: 1, price: 40, category: "Clothes"}, "date": "23 June"},
+    {"location": "Melbourne Central, 3000", "store":"Rebel Sport","totalPrice":180,"day":"Monday","items": {title: ["Nike Running Shoes", "Adidas Puffer Jacket", "Beanie"], quantity: 1, price: [100, 65, 15], category: "Clothes"}, "date": "26 June"},
+    {"location": "Chadstone, 3148","store":"Opporto","totalPrice":38,"day":"Monday","items":{title: ["Chicken", "Wrap", "Burger"], quantity: 2, price: [15,10, 13], category: "Eat Out"}, "date": "26 June"},
+    {"location": "Southbank, 3006","store":"Crown","totalPrice":70,"day":"Tuesday","items":{title: ["Tickets", "Popcorn", "Drinks"], quantity: 2, price: [50,13,7], category: "Entertainment"}, "date": "23 June"},
+    {"location": "Chadstone, 3148","store":"Rebel Sport","totalPrice": 150,"day":"Tuesday","items":{title: ["Pants", "Shirt", "Shoes"], quantity: 1, price: [50,30, 70], category: "Clothes"}, "date": "23 June"},
 ]
 let filter = "";
 let categoryFilter = "";
@@ -73,8 +73,6 @@ const ListPage = (props) => {
             <input type = "text" placeholder='Search through receipts' className = "prompt"
                 value = {props.term} onChange={ getSearchTerm } ref = {inputEl}/>
                 <></>
-                <text className = "starPadding"> </text>
-                <Button variant="contained" ><StarBorderIcon className = "QRCodeIcon"></StarBorderIcon></Button>
                 <p></p>
                 <div class = "buttonSection">
                 <Button onClick={()=>getSearchTermF("Entertainment")}className = "categoryButton1" variant="contained">ENTERTAINMENT</Button>
@@ -111,7 +109,7 @@ const createList = (filter, items) => {
                 currentDate = data[counter].date;
                 printList.push(createDay());
             }
-            printList.push(createReceipt());
+            printList.push(createReceipt(counter));
             console.log(counter);
         }
         else if (categoryFilter === ""){
@@ -124,7 +122,7 @@ const createList = (filter, items) => {
                     currentDate = data[counter].date;
                     printList.push(createDay());
                 }
-                printList.push(createReceipt());
+                printList.push(createReceipt(counter));
             }
         }
         else if (filter.trim().length === 0){
@@ -133,7 +131,7 @@ const createList = (filter, items) => {
                     currentDate = data[counter].date;
                     printList.push(createDay());
                 }
-                printList.push(createReceipt());
+                printList.push(createReceipt(counter));
             }
         }
         else if (filter.trim().length !== 0 && categoryFilter !== ""){
@@ -146,7 +144,7 @@ const createList = (filter, items) => {
                         currentDate = data[counter].date;
                         printList.push(createDay());
                     }
-                    printList.push(createReceipt());
+                    printList.push(createReceipt(counter));
         }
         }
     }
@@ -169,22 +167,30 @@ const createDay = () => {
     );
 }
 //Creates individual receipt entries
-const createReceipt = () => {
+const createReceipt = (value) => {
     //Return jsx based of current counter
+    console.log(value);
     return(
-        <Link to = "/container" className = "link">
+        <Link to={{ 
+            pathname: "/container", 
+            counterValue: value
+           }} className = "link">
         <div className = "tablePadding">
         <table className = 'receiptInfo'>
         <tr className = 'receiptBlock'>
             {/* Use an a tag here potentially to make whole row clicable*/}
-            <td className = 'receiptDate'>{data[counter].date}</td>
-            <td className = 'receiptStore'>{data[counter].store}</td>
-            <td className = 'receiptPrice'>${data[counter].totalPrice}</td>
+            <td className = 'receiptDate'>{data[value].date}</td>
+            <td className = 'receiptStore'>{data[value].store}</td>
+            <td className = 'receiptPrice'>${data[value].totalPrice}</td>
         </tr>
         </table>
         <br></br>
         </div>
         </Link>
     );
+}
+
+const consoleTest = (value) =>{
+    console.log(value);
 }
 export default ListPage;
